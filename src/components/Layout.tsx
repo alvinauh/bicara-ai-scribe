@@ -10,7 +10,8 @@ import {
   Home, 
   Settings, 
   Users, 
-  CreditCard 
+  CreditCard,
+  BookOpen
 } from "lucide-react";
 
 interface LayoutProps {
@@ -80,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Button
                   variant="ghost"
                   className="w-full justify-start"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/dashboard")}
                 >
                   <Home size={20} className="mr-0 md:mr-2" />
                   <span className="hidden md:inline">Dashboard</span>
@@ -92,6 +93,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 >
                   <FileText size={20} className="mr-0 md:mr-2" />
                   <span className="hidden md:inline">Notes</span>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start"
+                  onClick={() => navigate("/practice")}
+                >
+                  <BookOpen size={20} className="mr-0 md:mr-2" />
+                  <span className="hidden md:inline">Practice</span>
                 </Button>
                 <Button
                   variant="ghost"
