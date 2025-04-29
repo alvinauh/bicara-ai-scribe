@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Layout from "@/components/Layout";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
@@ -12,7 +14,7 @@ import Notes from "./pages/Notes";
 import Pricing from "./pages/Pricing";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
-import Practice from "./pages/Practice";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
@@ -62,21 +64,21 @@ const AppRoutes = () => {
         } 
       />
       <Route 
-        path="/practice" 
-        element={
-          <ProtectedRoute>
-            <Layout>
-              <Practice />
-            </Layout>
-          </ProtectedRoute>
-        } 
-      />
-      <Route 
         path="/pricing" 
         element={
           <ProtectedRoute>
             <Layout>
               <Pricing />
+            </Layout>
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/settings" 
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <Settings />
             </Layout>
           </ProtectedRoute>
         } 
@@ -89,13 +91,17 @@ const AppRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
-      </TooltipProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <AppRoutes />
+            </BrowserRouter>
+          </TooltipProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
