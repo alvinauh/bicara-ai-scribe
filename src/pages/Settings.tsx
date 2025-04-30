@@ -15,6 +15,10 @@ import { Settings, User, Lock, Moon, Sun, Languages } from 'lucide-react';
 // Define the plan type
 type PlanType = "free" | "premium";
 
+// Define plan constants to use in comparisons
+const FREE_PLAN: PlanType = "free";
+const PREMIUM_PLAN: PlanType = "premium";
+
 const SettingsPage: React.FC = () => {
   const { user } = useAuth();
   const { language, setLanguage, t } = useLanguage();
@@ -94,8 +98,8 @@ const SettingsPage: React.FC = () => {
     }
   };
   
-  // Define userPlan as PlanType to ensure type safety
-  const userPlan: PlanType = "free"; // This would come from user data in a real app
+  // Define userPlan as PlanType for type safety
+  const userPlan: PlanType = FREE_PLAN; // This would come from user data in a real app
   
   return (
     <div className="container max-w-4xl mx-auto py-8">
@@ -284,9 +288,9 @@ const SettingsPage: React.FC = () => {
             <CardContent className="space-y-4">
               <div className="p-4 rounded-lg bg-secondary">
                 <h3 className="font-medium text-lg">
-                  {t('current_plan')}: {userPlan === "free" ? t('free_plan') : t('premium_plan')}
+                  {t('current_plan')}: {userPlan === FREE_PLAN ? t('free_plan') : t('premium_plan')}
                 </h3>
-                {userPlan === "free" && (
+                {userPlan === FREE_PLAN && (
                   <Button className="mt-4" variant="default">
                     {t('upgrade_plan')}
                   </Button>
@@ -313,7 +317,7 @@ const SettingsPage: React.FC = () => {
                     </ul>
                   </CardContent>
                   <CardFooter>
-                    {userPlan === "free" ? (
+                    {userPlan === FREE_PLAN ? (
                       <Button disabled variant="outline">Current Plan</Button>
                     ) : (
                       <Button variant="outline">Downgrade</Button>
@@ -343,7 +347,7 @@ const SettingsPage: React.FC = () => {
                     </ul>
                   </CardContent>
                   <CardFooter>
-                    {userPlan === "premium" ? (
+                    {userPlan === PREMIUM_PLAN ? (
                       <Button disabled variant="outline">Current Plan</Button>
                     ) : (
                       <Button variant="default">Upgrade</Button>
