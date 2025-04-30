@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "serve dist -p 3000"  // Added for Render Web Service (if applicable)
+    "start": "serve dist -p 3000"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
