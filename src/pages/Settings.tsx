@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,8 +17,8 @@ import { Settings, User, Lock, Moon, Sun, Languages } from 'lucide-react';
 type PlanType = "free" | "premium";
 
 // Define plan constants to use in comparisons
-const FREE_PLAN: PlanType = "free";
-const PREMIUM_PLAN: PlanType = "premium";
+const FREE_PLAN = "free" as PlanType;
+const PREMIUM_PLAN = "premium" as PlanType;
 
 const SettingsPage: React.FC = () => {
   const { user } = useAuth();
