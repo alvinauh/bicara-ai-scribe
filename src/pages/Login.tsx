@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Login = () => {
   const { login, isLoading } = useAuth();
@@ -16,20 +17,24 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bicaraBlue-50 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-bicaraBlue-50 dark:bg-gray-900 p-4">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      
+      <Card className="w-full max-w-md dark:border-gray-700">
         <CardHeader className="text-center">
           <div className="mx-auto bg-bicaraBlue-600 text-white p-3 rounded-xl mb-4">
             <FileText size={32} />
           </div>
-          <CardTitle className="text-2xl font-bold text-bicaraBlue-800">Welcome to Bicara AI Scribe</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold text-bicaraBlue-800 dark:text-bicaraBlue-400">Welcome to Bicara AI Scribe</CardTitle>
+          <CardDescription className="dark:text-gray-400">
             Smart note-taking in English, Bahasa Melayu, and Mandarin
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Sign in to access your AI-powered meeting notes, organize your thoughts, 
               and transform your notes into presentations and essays.
             </p>
@@ -57,7 +62,7 @@ const Login = () => {
             )}
           </Button>
         </CardContent>
-        <CardFooter className="text-xs text-center text-gray-500 flex justify-center">
+        <CardFooter className="text-xs text-center text-gray-500 dark:text-gray-400 flex justify-center">
           By signing in, you agree to our Terms of Service and Privacy Policy.
         </CardFooter>
       </Card>

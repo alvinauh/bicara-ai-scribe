@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Notes = () => {
   const navigate = useNavigate();
@@ -97,10 +98,11 @@ const Notes = () => {
   });
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in dark:text-white">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <h1 className="text-3xl font-bold">Your Notes</h1>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <ThemeToggle />
           <Button onClick={() => navigate("/notes/new")}>
             <Plus size={16} className="mr-2" />
             New Note
@@ -115,7 +117,7 @@ const Notes = () => {
       <div className="flex flex-col md:flex-row gap-6">
         {/* Sidebar */}
         <div className="w-full md:w-64">
-          <Card>
+          <Card className="dark:border-gray-700">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg">Folders</CardTitle>
             </CardHeader>
@@ -128,14 +130,14 @@ const Notes = () => {
                 >
                   <FolderOpen size={16} className="mr-2" />
                   <span className="flex-1 text-left">{folder.name}</span>
-                  <span className="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">
+                  <span className="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full">
                     {folder.count}
                   </span>
                 </Button>
               ))}
             </CardContent>
             <CardFooter className="pt-2">
-              <Button variant="ghost" className="w-full justify-start text-bicaraBlue-600" size="sm">
+              <Button variant="ghost" className="w-full justify-start text-bicaraBlue-600 dark:text-bicaraBlue-400" size="sm">
                 <Plus size={14} className="mr-2" />
                 Add Folder
               </Button>
@@ -174,7 +176,7 @@ const Notes = () => {
 
             <Tabs defaultValue="grid">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   {filteredNotes.length} {filteredNotes.length === 1 ? 'note' : 'notes'}
                 </p>
                 <TabsList>
@@ -186,23 +188,23 @@ const Notes = () => {
               <TabsContent value="grid" className="mt-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {filteredNotes.map((note) => (
-                    <Card key={note.id} className="border-gray-200 hover:border-bicaraBlue-300 transition-all cursor-pointer"
+                    <Card key={note.id} className="border-gray-200 hover:border-bicaraBlue-300 transition-all cursor-pointer dark:border-gray-700 dark:hover:border-bicaraBlue-600"
                       onClick={() => navigate(`/notes/${note.id}`)}>
                       <CardHeader className="pb-2">
                         <div className="flex justify-between items-start">
                           <CardTitle className={`text-lg font-medium ${note.language === 'zh' ? 'lang-zh' : note.language === 'ms' ? 'lang-ms' : 'lang-en'}`}>
                             {note.title}
                           </CardTitle>
-                          <span className="text-xs text-gray-500">{note.date}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">{note.date}</span>
                         </div>
                       </CardHeader>
                       <CardContent className="pb-3">
-                        <p className={`text-sm text-gray-600 line-clamp-2 ${note.language === 'zh' ? 'lang-zh' : note.language === 'ms' ? 'lang-ms' : 'lang-en'}`}>
+                        <p className={`text-sm text-gray-600 dark:text-gray-300 line-clamp-2 ${note.language === 'zh' ? 'lang-zh' : note.language === 'ms' ? 'lang-ms' : 'lang-en'}`}>
                           {note.excerpt}
                         </p>
                         <div className="flex flex-wrap gap-2 mt-2">
                           {note.tags.map(tag => (
-                            <span key={tag} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                            <span key={tag} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">
                               {tag}
                             </span>
                           ))}
@@ -220,8 +222,8 @@ const Notes = () => {
                             <FileDown size={14} />
                           </Button>
                         </div>
-                        <div className="h-6 px-2 rounded bg-gray-100 flex items-center">
-                          <span className="text-xs font-medium text-gray-600">
+                        <div className="h-6 px-2 rounded bg-gray-100 dark:bg-gray-700 flex items-center">
+                          <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
                             {note.language === 'en' ? 'EN' : note.language === 'ms' ? 'MS' : 'ZH'}
                           </span>
                         </div>
@@ -229,13 +231,13 @@ const Notes = () => {
                     </Card>
                   ))}
 
-                  <Card className="border-dashed border-gray-300 hover:border-bicaraBlue-300 transition-all cursor-pointer flex items-center justify-center h-[200px]"
+                  <Card className="border-dashed border-gray-300 hover:border-bicaraBlue-300 transition-all cursor-pointer flex items-center justify-center h-[200px] dark:border-gray-600 dark:hover:border-bicaraBlue-600"
                     onClick={() => navigate("/notes/new")}>
                     <CardContent className="flex flex-col items-center p-6">
-                      <div className="w-10 h-10 rounded-full flex items-center justify-center border-2 border-gray-300 mb-2">
-                        <Plus size={20} className="text-gray-400" />
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center border-2 border-gray-300 dark:border-gray-600 mb-2">
+                        <Plus size={20} className="text-gray-400 dark:text-gray-500" />
                       </div>
-                      <p className="text-sm text-gray-500">Create New Note</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Create New Note</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -245,10 +247,10 @@ const Notes = () => {
                 <div className="space-y-2">
                   {filteredNotes.map((note) => (
                     <div key={note.id} 
-                      className="flex items-center justify-between p-3 border rounded-md hover:border-bicaraBlue-300 cursor-pointer transition-all"
+                      className="flex items-center justify-between p-3 border rounded-md hover:border-bicaraBlue-300 cursor-pointer transition-all dark:border-gray-700 dark:hover:border-bicaraBlue-600"
                       onClick={() => navigate(`/notes/${note.id}`)}>
                       <div className="flex items-center">
-                        <div className="mr-3 text-gray-500">
+                        <div className="mr-3 text-gray-500 dark:text-gray-400">
                           {note.language === 'zh' ? (
                             <Book size={20} />
                           ) : (
@@ -259,7 +261,7 @@ const Notes = () => {
                           <h3 className={`font-medium ${note.language === 'zh' ? 'lang-zh' : note.language === 'ms' ? 'lang-ms' : 'lang-en'}`}>
                             {note.title}
                           </h3>
-                          <div className="flex items-center gap-2 text-xs text-gray-500">
+                          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                             <span>{note.date}</span>
                             <span>•</span>
                             <span>{note.folder}</span>

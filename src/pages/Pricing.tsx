@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Check, Share2 } from "lucide-react";
 import { toast } from "sonner";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Pricing = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -86,26 +87,29 @@ const Pricing = () => {
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in dark:text-white">
       <section className="text-center space-y-4 max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold">Choose Your Plan</h1>
-        <p className="text-gray-600">
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold">Choose Your Plan</h1>
+          <ThemeToggle />
+        </div>
+        <p className="text-gray-600 dark:text-gray-300">
           Get premium features to enhance your note-taking experience or use our referral program to earn free access.
         </p>
         
         <div className="flex items-center justify-center space-x-4 mt-6">
-          <span className={`text-sm font-medium ${!isYearly ? 'text-bicaraBlue-800' : 'text-gray-500'}`}>Monthly</span>
+          <span className={`text-sm font-medium ${!isYearly ? 'text-bicaraBlue-800 dark:text-bicaraBlue-400' : 'text-gray-500 dark:text-gray-400'}`}>Monthly</span>
           <button
             type="button"
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isYearly ? 'bg-bicaraBlue-600' : 'bg-gray-300'}`}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isYearly ? 'bg-bicaraBlue-600' : 'bg-gray-300 dark:bg-gray-700'}`}
             onClick={() => setIsYearly(!isYearly)}
           >
             <span
               className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isYearly ? 'translate-x-6' : 'translate-x-1'}`}
             />
           </button>
-          <span className={`text-sm font-medium ${isYearly ? 'text-bicaraBlue-800' : 'text-gray-500'}`}>
-            Yearly <span className="text-bicaraGreen-600 font-medium">Save 15%</span>
+          <span className={`text-sm font-medium ${isYearly ? 'text-bicaraBlue-800 dark:text-bicaraBlue-400' : 'text-gray-500 dark:text-gray-400'}`}>
+            Yearly <span className="text-bicaraGreen-600 dark:text-bicaraGreen-500 font-medium">Save 15%</span>
           </span>
         </div>
       </section>
@@ -114,7 +118,7 @@ const Pricing = () => {
         {plans.map((plan, index) => (
           <Card 
             key={index} 
-            className={`relative ${plan.isPopular ? 'border-bicaraBlue-400 shadow-lg' : 'border-gray-200'}`}
+            className={`relative ${plan.isPopular ? 'border-bicaraBlue-400 dark:border-bicaraBlue-500 shadow-lg' : 'border-gray-200 dark:border-gray-700'}`}
           >
             {plan.isPopular && (
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-bicaraBlue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -123,7 +127,7 @@ const Pricing = () => {
             )}
             <CardHeader>
               <CardTitle className="text-xl">{plan.name}</CardTitle>
-              <CardDescription>{plan.description}</CardDescription>
+              <CardDescription className="dark:text-gray-400">{plan.description}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center">
@@ -131,7 +135,7 @@ const Pricing = () => {
                   {plan.currency}{isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                 </span>
                 {plan.monthlyPrice > 0 && (
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
                     /{isYearly ? 'year' : 'month'}
                   </span>
                 )}
@@ -165,9 +169,9 @@ const Pricing = () => {
         ))}
       </section>
 
-      <section className="mt-16 bg-bicaraBlue-50 rounded-lg p-8 text-center max-w-4xl mx-auto">
+      <section className="mt-16 bg-bicaraBlue-50 dark:bg-bicaraBlue-900/30 rounded-lg p-8 text-center max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4">Need a custom plan for your school or organization?</h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
           We offer special pricing for educational institutions and large organizations.
           Contact us to discuss your requirements.
         </p>
