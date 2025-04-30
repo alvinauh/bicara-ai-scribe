@@ -6,11 +6,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+error.log  # Added for Winston logs from server.js
 
+# Dependencies
 node_modules
+
+# Build output
 dist
 dist-ssr
 *.local
+
+# File uploads
+uploads/  # Added for Multer temporary files
+
+# Environment variables
+.env  # Added to ignore local environment file
 
 # Editor directories and files
 .vscode/*
