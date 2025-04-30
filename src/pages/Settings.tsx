@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +11,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Settings, User, Lock, Moon, Sun, Languages } from 'lucide-react';
+
+// Define the plan type
+type PlanType = "free" | "premium";
 
 const SettingsPage: React.FC = () => {
   const { user } = useAuth();
@@ -92,7 +94,8 @@ const SettingsPage: React.FC = () => {
     }
   };
   
-  const userPlan = "free"; // This would come from user data in a real app
+  // Define userPlan as PlanType to ensure type safety
+  const userPlan: PlanType = "free"; // This would come from user data in a real app
   
   return (
     <div className="container max-w-4xl mx-auto py-8">
