@@ -5,6 +5,7 @@ const winston = require('winston');
 const { createClient } = require('@supabase/supabase-js');
 const axios = require('axios');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 
@@ -46,19 +47,36 @@ app.get('/api/data', async (req, res) => {
   }
 });
 
-// API route: AI transcription (e.g., using xAI's Grok API)
+// API route: AI transcription using Open AI's Whisper API
 app.post('/api/ai/transcribe', upload.single('audio'), async (req, res) => {
   try {
     const audioFile = req.file; // Uploaded audio file
     if (!audioFile) {
       return res.status(400).json({ error: 'No audio file uploaded' });
     }
-    // Example: Call xAI's Grok API for transcription (adjust based on actual API)
-    const response = await axios.post('https://api.x.ai/grok/transcribe', {
-      audio: audioFile.path, // Note: You may need to read the file or use a different format depending on the API
-      api_key: process.env.GROK_API_KEY,
-    });
-    res.json({ transcription: response.data.transcription });
+
+    // Read the audio file as a stream
+    const audioStream = fs.createReadStream(audioFile.path);
+
+    // Call Open AI's Whisper API for transcription
+    const response = await axios.post(
+      'https://api.openai.com/v1/audio/transcriptions',
+      {
+        file: audioStream,
+        model: 'whisper-1',
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    // Clean up: Delete the temporary file
+    fs.unlinkSync(audioFile.path);
+
+    res.json({ transcription: response.data.text });
   } catch (error) {
     logger.error(error.message);
     res.status(500).json({ error: error.message });
